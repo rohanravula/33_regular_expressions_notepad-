@@ -1,0 +1,238 @@
+                                                        Insert a newline for every line of text Back to top)"
+"which means for every name their will be a line gap and next line the next name will be printed"
+
+
+"Formula"  	 	   (.)$     $1\n									
+
+					
+rohan
+mohan 
+rahul
+akhim
+robin
+vijay
+
+"Result"
+
+rohan
+
+mohan 
+
+rahul 
+
+akhim
+
+robin
+
+vijay
+
+
+                                                              "Removing blank lines (Back to top)"
+"it will remove the one line space and it will comes the names in with out space"
+"formula"                          ^[ \t]*$\r?\n*
+
+rohan
+
+mohan
+
+johan
+
+sohan
+
+
+"Result"
+
+rohan
+mohan
+johan
+sohan
+
+
+                                                             "Replace comma separated list with string list (Back to top)"
+"if the names are in one line representing with comma then we want the names in line by line then use this formaula"
+"formula"                                                           ,[ \t]+     \n
+
+rohan, mohan, johan, sohan, mallikarjun, vikranth
+
+"Result"
+
+rohan
+mohan
+johan
+sohan
+mallikarjun
+vikranth
+
+                                                                 " Remove duplicate words (Back to top)"
+"if their are dublicate words then use this formaula to romove the dublicate names"
+"Formula"                                                            	\b(\w+)\s+\1\b      \1
+
+hii hello hello rohan rohan mohan kumar how are you you.
+
+"Result"
+
+hii hello rohan mohan kumar how are you.
+
+                                                                 "Replace with first word from each line (Back to top)"
+
+"if their is a long sentence we want the only first word we need to do this"
+"Formula"                                                                    	^([^ \t]+).*  \1
+
+paris is good place
+hyderabad is perls of india
+rohan completed his digree
+
+"Result"
+
+paris
+hyderabad
+rohan
+
+                                                                  "Replace with last word from each line (Back to top)"
+"if their is a long sentence we want only last word we need to do this "
+"Formula"                                                                  (.* )(\w+)$           '$2'
+
+paris is good place
+hyderabad is perls of india
+rohan completed his digree
+
+"Result"
+
+paris'place'
+hyderabad'india'
+rohan'digree'
+
+
+                                                                      " Replace all duplicate lines with a single instance (Back to top) "
+"if their are dublicate lines  i,e. two lines same same word then use this formula"
+"Formula"                                                   	                         (?sm)(^[^\r\n]*)[\r\n](?=.*^\1) 
+
+hii how are you
+rohan complected his graduation 
+rohan complected his graduation
+now what are you doing 
+when you will find a job
+
+"Result"
+
+
+hii how are you 
+now what are you doing 
+when you will find a job
+
+
+                                                                  "Insert all text into a single line (Back to top)"
+
+"if the right shift are in shuffled in diffrent manner in inrevelent manner we need in one line use this formula"
+"Formula"                                                              \R
+<hello>
+       <hii>
+	   <how are you>
+	            <rohan>
+				<abcdefgh ijklmno>
+				               <pqrstuvwxy   z>
+<bye>
+
+"Result"
+
+<hello>       <hii>	   <how are you>	            <rohan>				<abcdefgh ijklmno>				               <pqrstuvwxy   z><bye>
+
+
+               
+
+                                                  			   " Replace the first line in text (Back to top)"
+"to remove the first line use this method"
+
+"Formula"                                                    \A.*
+
+hiii how are you , 
+how do you do 
+my name is rohan
+i had completed my graduation in the year
+2022
+
+"result"
+hiii how are you , 
+how do you do 
+my name is rohan
+i had completed my graduation in the year               #this is not working
+
+                        
+						
+						
+						                                                       "Trim additional spaces from sentences (Back to top) "
+" this is used to remove more space in between the words in if thier are multiple spaces in words to remove all that use  this"
+
+"Formula"                              ^[\s]*(.*?)[\s]*$
+
+hii     how are you
+how do       do you doo        and 
+what else now              you are doing
+
+"Result"
+
+
+hii     how are you
+how do       do you doo        and  
+what else now              you are doing            #by using this formula it is not working but it is getting delet every this which has been selected
+
+
+                                                          "Remove unwanted characters (Back to top)"
+" We may wish to remove all special characters except alphanumeric characters, full stops and colons/semi-colons, spaces, tabs, newlines etc:"
+
+		"Formula"                                [^0-9a-zA-Z \t\n]+
+		
+		dlkfkla hd;hajf  ajsdjlf job
+kjhakdj dkjhk;jfa , kjfa ; jhajd
+jalkjd // djhajldj @
+
+"Result"
+
+					dlkfkla hdhajf  ajsdjlf job
+kjhakdj dkjhkjfa  kjfa  jhajd
+jalkjd  djhajldj 
+
+    
+	
+	                                                        "Convert string to lower case except for acronyms & abbreviations (Back to top)"
+" it will be coverting to upper case word to lower case word which we will select it will change if it is upper case it will cahnge to lower case"
+ 
+ "Formula"                                                   \b(?![A-Z]+\b)[a-zA-Z]+                            \L$0
+
+The Rohan was IN IPC SEC 234 
+
+"Result"
+
+The Rohan was IN IPC SEC 234                     #this is also not working
+
+
+
+                                                    "Remove trailing whitespaces from lines with text and empty lines (Back to top)"
+"As requested in the comments below, some regex to remove trailing whitespaces from lines with text and empty lines"
+
+"Formula"                                   [ \t\xA0]+$           \1
+
+rohan kumar
+
+mohan goud
+dhanveet
+
+"Result"                            
+
+rohan kumar
+
+mohan goud
+dhanveet                    #this is also not workig
+
+
+
+                                                    "Find & remove apostrophe from the middle of a word (Back to top)"
+" In this example some blurb provided by Cisco as part of a yaml file was causing problems when trying to create a json mapping."
+
+"Formula"                       (?<=\p{L})'(?=\p{L})
+hii CASi'o do
+
+
+"Result"
+
+hii CASio do
